@@ -1,0 +1,14 @@
+name: Epic
+description: 一组相关需求的集合
+labels: ["type:epic", "status:backlog"]
+body:
+  - type: textarea
+    id: goal
+    attributes: { label: 目标 }
+    validations: { required: true }
+  - type: textarea
+    id: stories
+    attributes: { label: 包含的需求（Story 列表） }
+  - type: textarea
+    id: deps
+    attributes: { label: 依赖 }

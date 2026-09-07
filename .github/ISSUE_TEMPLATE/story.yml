@@ -1,0 +1,17 @@
+name: 需求（Story）
+description: 一个可独立交付、可验收的需求
+labels: ["type:story", "status:backlog"]
+body:
+  - type: textarea
+    id: background
+    attributes: { label: 背景与目标, description: 为什么做、达成什么效果 }
+    validations: { required: true }
+  - type: textarea
+    id: scope
+    attributes: { label: 范围, description: 包含 / 不包含 }
+  - type: textarea
+    id: ac
+    attributes: { label: 初步验收要点, description: PM 将在 PRD 中细化为 AC }
+  - type: input
+    id: epic
+    attributes: { label: 所属 Epic, placeholder: "#1" }

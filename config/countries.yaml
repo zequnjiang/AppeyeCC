@@ -1,0 +1,115 @@
+# 国家 / 语言 / 关键词 / 识别规则种子。启动时同步到数据库（新增项插入，已存在项不覆盖后台改动）。
+# 新增国家：追加一个条目即可。code 为 ISO 3166-1 alpha-2 小写。
+countries:
+  - code: th
+    name_zh: 泰国
+    gp_lang: th
+    ios_lang: th
+    enabled: true
+    keywords:
+      - { term: loan, lang: en }
+      - { term: cash loan, lang: en }
+      - { term: personal loan, lang: en }
+      - { term: เงินกู้, lang: th }
+      - { term: สินเชื่อ, lang: th }
+      - { term: กู้เงิน, lang: th }
+      - { term: ยืมเงิน, lang: th }
+      - { term: สินเชื่อส่วนบุคคล, lang: th }
+    rules:
+      - { kind: regex, pattern: "(ธนาคารแห่งประเทศไทย|Bank of Thailand|\\bBoT\\b|กระทรวงการคลัง|Ministry of Finance)", weight: 3, note: 泰国监管机构披露 }
+      - { kind: regex, pattern: "(non-regulated loan provider|ไม่ได้อยู่ภายใต้การกำกับ)", weight: 3, note: 泰国非受监管披露语 }
+      - { kind: regex, pattern: "(อัตราดอกเบี้ย|ดอกเบี้ยสูงสุด|ค่าธรรมเนียม)", weight: 2, note: 泰国利率/费用披露 }
+      - { kind: keyword, pattern: "สินเชื่อ|เงินกู้|กู้เงิน|ยืมเงิน", weight: 3, note: 泰语贷款关键词 }
+  - code: mx
+    name_zh: 墨西哥
+    gp_lang: es
+    ios_lang: es
+    enabled: true
+    keywords:
+      - { term: loan, lang: en }
+      - { term: préstamo, lang: es }
+      - { term: préstamos personales, lang: es }
+      - { term: crédito rápido, lang: es }
+      - { term: dinero rápido, lang: es }
+      - { term: préstamo en línea, lang: es }
+    rules:
+      - { kind: regex, pattern: "\\b(CONDUSEF|CNBV|SOFOM|SOFIPO|Buró de Crédito)\\b", weight: 3, note: 墨西哥监管/机构 }
+      - { kind: regex, pattern: "\\bCAT\\b.{0,40}%|Costo Anual Total", weight: 3, note: 墨西哥 CAT 披露 }
+      - { kind: regex, pattern: "tasa de inter[eé]s", weight: 2, note: 利率披露 }
+      - { kind: keyword, pattern: "préstamo|prestamo|crédito|credito", weight: 3, note: 西语贷款关键词 }
+  - code: ph
+    name_zh: 菲律宾
+    gp_lang: en
+    ios_lang: en
+    enabled: true
+    keywords:
+      - { term: loan, lang: en }
+      - { term: cash loan, lang: en }
+      - { term: quick loan, lang: en }
+      - { term: online loan, lang: en }
+      - { term: utang, lang: tl }
+      - { term: pautang, lang: tl }
+      - { term: pera loan, lang: tl }
+    rules:
+      - { kind: regex, pattern: "SEC Registration (No|Number)|Certificate of Authority|\\bCA No", weight: 4, note: 菲律宾 SEC 注册与 CA 披露 }
+      - { kind: regex, pattern: "Corporate Name|Business Name", weight: 2, note: 菲律宾公司名披露 }
+      - { kind: keyword, pattern: "utang|pautang|loan", weight: 2, note: 菲律宾关键词 }
+  - code: pk
+    name_zh: 巴基斯坦
+    gp_lang: en
+    ios_lang: en
+    enabled: true
+    keywords:
+      - { term: loan, lang: en }
+      - { term: cash loan, lang: en }
+      - { term: personal loan app, lang: en }
+      - { term: qarza, lang: ur }
+      - { term: قرض, lang: ur }
+    rules:
+      - { kind: regex, pattern: "\\bSECP\\b|Securities and Exchange Commission of Pakistan|\\bNBFC\\b", weight: 4, note: 巴基斯坦 SECP/NBFC 披露 }
+      - { kind: keyword, pattern: "qarza|قرض|loan", weight: 2, note: 巴基斯坦关键词 }
+  - code: id
+    name_zh: 印度尼西亚
+    gp_lang: id
+    ios_lang: id
+    enabled: true
+    keywords:
+      - { term: loan, lang: en }
+      - { term: pinjaman, lang: id }
+      - { term: pinjaman online, lang: id }
+      - { term: pinjol, lang: id }
+      - { term: dana tunai, lang: id }
+      - { term: kredit cepat, lang: id }
+    rules:
+      - { kind: regex, pattern: "\\bOJK\\b|Otoritas Jasa Keuangan|Berizin dan diawasi", weight: 4, note: 印尼 OJK 披露 }
+      - { kind: regex, pattern: "\\bbunga\\b|suku bunga|biaya layanan", weight: 2, note: 印尼利率/费用 }
+      - { kind: keyword, pattern: "pinjaman|pinjol|dana tunai|kredit", weight: 3, note: 印尼语关键词 }
+  - code: ar
+    name_zh: 阿根廷
+    gp_lang: es
+    ios_lang: es
+    enabled: true
+    keywords:
+      - { term: loan, lang: en }
+      - { term: préstamo, lang: es }
+      - { term: préstamos personales, lang: es }
+      - { term: crédito online, lang: es }
+      - { term: plata ya, lang: es }
+      - { term: préstamo rápido, lang: es }
+    rules:
+      - { kind: regex, pattern: "\\bBCRA\\b|Banco Central", weight: 3, note: 阿根廷监管 }
+      - { kind: regex, pattern: "\\bCFT\\b|Costo Financiero Total|\\bTNA\\b|\\bTEA\\b", weight: 3, note: 阿根廷 CFT/TNA/TEA 披露 }
+      - { kind: keyword, pattern: "préstamo|prestamo|crédito|credito", weight: 3, note: 西语贷款关键词 }
+
+# 全局规则：对所有国家生效
+global_rules:
+  - { kind: category, pattern: "FINANCE", weight: 2, note: 商店分类为金融 }
+  - { kind: keyword, pattern: "loan|cash|credit|lending|borrow", weight: 2, note: 英文贷款关键词 }
+  - { kind: regex, pattern: "\\bAPR\\b|annual percentage rate|interest rate", weight: 2, note: 年化利率披露 }
+  - { kind: regex, pattern: "(\\d{1,3})\\s*(days|día|dias|hari|วัน|araw)\\b.{0,60}(\\d{2,4})\\s*(days|día|dias|hari|วัน|araw)", weight: 3, note: 最短/最长还款期披露 }
+  - { kind: regex, pattern: "(example|ejemplo|contoh|ตัวอย่าง)\\b.{0,80}(\\d[\\d,\\.]*)", weight: 1, note: 代表性成本示例 }
+  - { kind: negative, pattern: "calculator|calculadora|kalkulator|simulator|budget|invest|crypto|bitcoin|trading|forex|wallet only", weight: -3, note: 非贷款金融工具 }
+  - { kind: negative, pattern: "\\bgame\\b|juego|permainan|เกม", weight: -4, note: 游戏 }
+
+# 判定阈值：得分 >= loan_threshold 判为个人贷款应用
+loan_threshold: 6
